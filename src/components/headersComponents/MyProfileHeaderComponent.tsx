@@ -6,7 +6,7 @@ const MyProfileHeaderComponent = () => {
         <div>
             <ul>
                 <li><Link to="myCars">My Cars</Link></li>
-                <li><Link to="myPosts">My Posts</Link></li>
+                <li><Link to="myFriends">My Friends</Link></li>
             </ul>
         </div>
     );
