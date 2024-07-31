@@ -7,13 +7,10 @@ import {retrieveLocalStorage} from "../helpers/helper";
 import {ICarPaginatedModel} from "../models/CarPaginated";
 
 const axiosInstanceOwuLink = axios.create({
-    baseURL: "http://owu.linkpc.net/carsAPI/v2/",
+    baseURL: "http://owu.linkpc.net/carsAPI/v2",
     headers: {}
 })
-const axiosInstanceMyfriendsProfile = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com/",
-    headers: {}
-})
+
 axiosInstanceOwuLink.interceptors.request.use(request => {
     if (localStorage.getItem("tokenPair") && request.url !== "/auth/refresh") {
         request.headers.set("Authorization", "Bearer " + retrieveLocalStorage<ITokenRefresh>("tokenPair").access)
@@ -29,10 +26,8 @@ const userService = {
 }
 const authService = {
     authUser: async (authUser: IUserDataModel): Promise<boolean> => {
-        let response
-
-            response = await axiosInstanceOwuLink.post<ITokenRefresh>("/auth", authUser)
-            localStorage.setItem("tokenPair", JSON.stringify(response.data));
+        const response = await axiosInstanceOwuLink.post<ITokenRefresh>("/auth", authUser)
+        localStorage.setItem("tokenPair", JSON.stringify(response.data));
         return !!(response?.data?.access && response?.data?.refresh)
     },
     refresh: async (): Promise<void> => {
@@ -47,4 +42,18 @@ const carsService = {
         return response.data
     }
 }
-export {userService, authService, carsService};
+const axiosInstanceMyfriendsProfile = axios.create({
+    baseURL: "https://jsonplaceholder.typicode.com/",
+    headers: {}
+})
+const myFriendsUsersService = {
+    getAllUsers: async () => {
+        return await axiosInstanceMyfriendsProfile.get("/users")
+    }
+}
+const myFriendsPostsService = {
+    getAllUsersPosts: async () => {
+        return await axiosInstanceMyfriendsProfile.get("/posts")
+    }
+}
+export {userService, authService, carsService, myFriendsUsersService, myFriendsPostsService};

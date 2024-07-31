@@ -1,9 +1,10 @@
 import React from 'react';
+import MyFriendsUsersComponent from "../../components/myfriendscomponent/MyFriendsUsersComponent";
 
 const MyFriendsUsersPage = () => {
     return (
         <div>
-            MyFriendsUsersPage
+            <MyFriendsUsersComponent/>
         </div>
     );
 };

@@ -7,7 +7,7 @@ import CarsPage from "../pages/CarsPage";
 import MyFriendsLayout from "../layouts/MyFriendsLayout";
 import MyFriendsUsersPage from "../pages/myFriendsPage/MyFriendsUsersPage";
 import MyFriendsPostsPage from "../pages/myFriendsPage/MyFriendsPostsPage";
-import MyFriendsUsersPostsPage from "../components/myfriendscomponent/MyFriendsUsersPostsPage";
+import MyFriendsUsersPostsPage from "../pages/myFriendsPage/MyFriendsUsersPostsPage";
 
 export const router = createBrowserRouter([
 
